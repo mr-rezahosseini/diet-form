@@ -8,7 +8,28 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 <style>
-#protected-content { display: none; }
+/* for securing the form */
+.locked-body #main-content {
+display: none !important;
+}
+.locked-body #lock-screen {
+display: flex !important;
+}
+#lock-screen {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+background: #2b2b2b;
+z-index: 99999;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+font-family: 'Vazirmatn', sans-serif;
+color: #fff;
+}
 
 :root {
 --bg-color: #fbf8f3;
@@ -41,7 +62,6 @@ align-items: center;
 padding: 10px;
 }
 
-/* ساختار ثابت صفحه برای تطابق صددرصدی با A4 افقی */
 .page {
 width: 297mm;
 height: 210mm;
@@ -398,7 +418,6 @@ cursor: pointer;
 font-size: 13px;
 }
 
-/* واکنش‌گرا برای نمایش درست در صفحه مانیتور یا گوشی قبل از پرینت */
 @media screen and (max-width: 1200px) {
 body { padding: 5px; }
 .no-print-bar { flex-direction: column; gap: 8px; text-align: center; width: 100%; }
@@ -409,7 +428,6 @@ body { padding: 5px; }
 .page { transform: scale(0.41); transform-origin: top center; margin-bottom: -120mm; }
 }
 
-/* بخش طلایی تنظیمات پرینت مشترک برای ویندوز، آیفون و آیپد */
 @media print {
 * {
 -webkit-print-color-adjust: exact !important;
@@ -443,18 +461,20 @@ margin: 0mm;
 }
 </style>
 </head>
-<body>
+<body class="locked-body">
 
-<script>
-const correctPassword = "1234";
-let userEntered = prompt("لطفاً رمز عبور فرم رژیم را وارد کنید:");
-if (userEntered === correctPassword) {
-document.write('<div id="protected-content">');
-} else {
-document.write('<div style="text-align:center; margin-top:100px; font-family:Vazirmatn, sans-serif;"><h3>❌ رمز عبور اشتباه است یا دسترسی مجاز نیست.</h3><p>لطفاً صفحه را رفرش کنید و دوباره تلاش کنید.</p></div>');
-}
-</script>
+<!-- صفحه قفل امنیتی -->
+<div id="lock-screen">
+<h3 style="margin-bottom: 15px;">🔒 برنامه رژیم اختصاصی</h3>
+<p style="margin-bottom: 15px; font-size: 14px; opacity: 0.8;">لطفاً رمز عبور را وارد کنید:</p>
+<input type="password" id="passInput" style="padding: 8px 15px; font-size: 16px; border-radius: 6px; border: none; text-align: center; margin-bottom: 10px;" placeholder="رمز عبور">
+<br>
+<button onclick="checkPassword()" style="background: #c5a059; color: #2b2b2b; border: none; padding: 8px 20px; border-radius: 6px; font-weight: bold; cursor: pointer;">ورود به برنامه</button>
+<p id="errorMsg" style="color: #ff6b6b; margin-top: 15px; font-size: 13px; display: none;">❌ رمز عبور اشتباه است!</p>
+</div>
 
+<!-- محتوای اصلی برنامه -->
+<div id="main-content" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
 <div class="no-print-bar">
 <div>
 <strong>📋 فرم رژیم غذایی مطب بچم</strong>
@@ -663,7 +683,7 @@ document.write('<div style="text-align:center; margin-top:100px; font-family:Vaz
 <div class="list-body">
 <div class="list-row"><span contenteditable="true">سبزیجات خام: ۱ لیوان</span></div>
 <div class="list-row"><span contenteditable="true">سبزیجات پخته: ۱/۲ لیوان</span></div>
-<div class="list-row"><text contenteditable="true">خیار متوسط: ۲ عدد</text></div>
+<div class="list-row"><span contenteditable="true">خیار متوسط: ۲ عدد</span></div>
 <div class="list-row"><span contenteditable="true">گوجه فرنگی: ۱ عدد</span></div>
 <div class="list-row"><span contenteditable="true">هویج: ۱ عدد</span></div>
 <div class="list-row"><span contenteditable="true"></span></div>
@@ -678,9 +698,28 @@ document.write('<div style="text-align:center; margin-top:100px; font-family:Vaz
 </div>
 </div>
 </div>
+</div>
 
 <script>
-document.write('</div>');
+const correctPassword = "1234"; // don't look at here
+
+function checkPassword() {
+const inputVal = document.getElementById('passInput').value;
+const errorMsg = document.getElementById('errorMsg');
+
+if (inputVal === correctPassword) {
+document.body.classList.remove('locked-body');
+} else {
+errorMsg.style.display = 'block';
+}
+}
+
+// enter to login
+document.getElementById('passInput').addEventListener('keypress', function (e) {
+if (e.key === 'Enter') {
+checkPassword();
+}
+});
 
 function setWater(count) {
 const container = document.getElementById('waterContainer');
