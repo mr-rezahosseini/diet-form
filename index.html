@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>برنامه غذایی هفتگی - ندا سلمان مهاجر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+--bg-color: #fbf8f3;
+--card-bg: #f8f4ec;
+--primary-dark: #3b4522;
+--primary-medium: #4a542b;
+--primary-light: #606c38;
+--accent-gold: #c5a059;
+--text-color: #2b2b2b;
+--border-color: #dcd3c1;
+--light-border: #eee7d8;
+--water-blue: #0284c7;
+--water-inactive: #cbd5e1;
+}
+
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+-webkit-tap-highlight-color: transparent;
+}
+
+body {
+background-color: #e5e5e5;
+color: var(--text-color);
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 10px;
+}
+
+/* Page Container - Landscape A4 aspect ratio */
+.page {
+width: 297mm;
+height: 210mm;
+background-color: var(--bg-color);
+padding: 12mm 15mm;
+margin-bottom: 25px;
+box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+position: relative;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+overflow: hidden;
+border-radius: 4px;
+}
+
+/* Decorative Double Border */
+.page-border {
+position: absolute;
+top: 6mm;
+left: 6mm;
+right: 6mm;
+bottom: 6mm;
+border: 2px solid var(--accent-gold);
+pointer-events: none;
+z-index: 1;
+}
+
+.page-border::after {
+content: '';
+position: absolute;
+top: 2px;
+left: 2px;
+right: 2px;
+bottom: 2px;
+border: 1px solid var(--primary-dark);
+}
+
+.content-wrap {
+position: relative;
+z-index: 2;
+height: 100%;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
+
+.corner-leaf {
+position: absolute;
+width: 80px;
+height: 80px;
+opacity: 0.85;
+pointer-events: none;
+z-index: 1;
+}
+.corner-bottom-right {
+bottom: 6mm;
+right: 6mm;
+}
+
+.header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 12px;
+padding: 0 5px;
+flex-shrink: 0;
+}
+
+.header-box {
+display: flex;
+align-items: center;
+gap: 8px;
+font-size: 13px;
+font-weight: 500;
+color: var(--primary-dark);
+background: rgba(255, 255, 255, 0.7);
+padding: 6px 14px;
+border-radius: 8px;
+border: 1px solid var(--border-color);
+}
+
+.header-title-container {
+text-align: center;
+}
+
+.header-title {
+font-size: 24px;
+font-weight: 800;
+color: var(--primary-dark);
+letter-spacing: -0.5px;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 12px;
+}
+
+.header-subtitle {
+font-size: 11px;
+color: var(--primary-medium);
+margin-top: 2px;
+font-weight: 500;
+}
+
+.editable-field {
+outline: none;
+border-bottom: 1px dashed var(--accent-gold);
+padding: 2px 6px;
+min-width: 60px;
+display: inline-block;
+transition: background 0.2s;
+min-height: 24px;
+}
+
+.editable-field:hover, .editable-field:focus {
+background-color: #fff8e7;
+border-bottom-style: solid;
+}
+
+.summary-cards {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 12px;
+margin-bottom: 14px;
+}
+
+.card {
+background: #fff;
+border: 1px solid var(--border-color);
+border-radius: 10px;
+padding: 8px 12px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+min-height: 65px;
+}
+
+.card-header {
+display: flex;
+align-items: center;
+gap: 6px;
+font-size: 11px;
+font-weight: 700;
+color: var(--primary-dark);
+margin-bottom: 4px;
+}
+
+.card-body {
+font-size: 12px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.water-drops-wrapper {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 2px;
+width: 100%;
+}
+
+.water-drops-container {
+display: flex;
+align-items: center;
+gap: 3px;
+direction: ltr;
+}
+
+.water-drop {
+width: 18px;
+height: 22px;
+cursor: pointer;
+color: var(--water-inactive);
+transition: all 0.2s ease;
+}
+
+.water-drop.active {
+color: var(--water-blue);
+filter: drop-shadow(0 1px 2px rgba(2, 132, 199, 0.4));
+}
+
+.water-count-text {
+font-size: 11px;
+font-weight: 700;
+color: var(--primary-dark);
+margin-top: 2px;
+}
+
+.diet-table {
+width: 100%;
+table-layout: fixed;
+border-collapse: separate;
+border-spacing: 0;
+border: 1px solid var(--primary-dark);
+border-radius: 8px;
+overflow: hidden;
+flex-grow: 1;
+margin: 10px 0;
+}
+
+.col-day { width: 10%; }
+.col-main { width: 22%; }
+.col-snack { width: 11%; }
+
+.diet-table th {
+background-color: var(--primary-dark);
+color: #ffffff;
+font-size: 12px;
+font-weight: 700;
+padding: 9px 3px;
+text-align: center;
+border-left: 1px solid rgba(255,255,255,0.15);
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.diet-table th.col-main {
+background-color: #2e371a;
+font-size: 13px;
+}
+
+.diet-table th:last-child {
+border-left: none;
+}
+
+.diet-table td {
+background-color: #ffffff;
+border-bottom: 1px solid var(--light-border);
+border-left: 1px solid var(--light-border);
+padding: 8px 6px;
+font-size: 11px;
+vertical-align: top;
+outline: none;
+word-wrap: break-word;
+overflow-wrap: break-word;
+min-height: 35px;
+}
+
+.diet-table td:hover, .diet-table td:focus {
+background-color: #fffdf9;
+}
+
+.diet-table td:last-child {
+border-left: none;
+}
+
+.diet-table tr:last-child td {
+border-bottom: none;
+}
+
+.day-cell {
+background-color: var(--card-bg) !important;
+font-weight: 700;
+color: var(--primary-dark);
+text-align: center;
+vertical-align: middle !important;
+font-size: 13px;
+}
+
+.advice-container {
+background: #ffffff;
+border: 1px solid var(--border-color);
+border-radius: 10px;
+padding: 20px 25px;
+flex-grow: 1;
+margin-bottom: 10px;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
+
+.advice-list {
+list-style: none;
+display: flex;
+flex-direction: column;
+gap: 12px;
+}
+
+.advice-item {
+display: flex;
+align-items: center;
+border-bottom: 1px dashed var(--border-color);
+padding-bottom: 6px;
+font-size: 13px;
+line-height: 1.6;
+}
+
+.advice-item::before {
+content: "🌿";
+margin-left: 10px;
+font-size: 12px;
+opacity: 0.8;
+}
+
+.advice-item span {
+width: 100%;
+outline: none;
+min-height: 22px;
+}
+
+.lists-wrapper {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 20px;
+flex-grow: 1;
+margin-bottom: 10px;
+}
+
+.list-box {
+background: #ffffff;
+border: 1px solid var(--border-color);
+border-radius: 10px;
+overflow: hidden;
+display: flex;
+flex-direction: column;
+}
+
+.list-header {
+background-color: var(--primary-dark);
+color: white;
+padding: 10px 15px;
+font-size: 14px;
+font-weight: 700;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.list-body {
+padding: 15px;
+display: flex;
+flex-direction: column;
+gap: 10px;
+flex-grow: 1;
+}
+
+.list-row {
+display: flex;
+align-items: center;
+border-bottom: 1px solid var(--light-border);
+padding-bottom: 5px;
+font-size: 12px;
+}
+
+.list-row::before {
+content: "◯";
+margin-left: 8px;
+color: var(--accent-gold);
+font-weight: bold;
+font-size: 11px;
+}
+
+.list-row span {
+width: 100%;
+outline: none;
+min-height: 20px;
+}
+
+.footer {
+flex-shrink: 0;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 4px 10px 0 10px;
+font-size: 11px;
+color: var(--primary-dark);
+font-weight: 600;
+}
+
+.footer-brand {
+display: flex;
+align-items: center;
+gap: 6px;
+}
+
+.page-number {
+background: var(--card-bg);
+padding: 3px 12px;
+border-radius: 12px;
+border: 1px solid var(--border-color);
+font-size: 10px;
+}
+
+/* Print Controls Bar - Optimized for iOS */
+.no-print-bar {
+width: 100%;
+max-width: 297mm;
+background: #2b2b2b;
+color: #fff;
+padding: 12px 20px;
+border-radius: 8px;
+margin-bottom: 20px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.btn-print {
+background: var(--accent-gold);
+color: #2b2b2b;
+border: none;
+padding: 8px 18px;
+border-radius: 6px;
+font-weight: 700;
+cursor: pointer;
+font-size: 13px;
+}
+
+/* Mobile / iPad Responsive scaling */
+@media screen and (max-width: 1150px) {
+body {
+padding: 5px;
+}
+.no-print-bar {
+flex-direction: column;
+gap: 10px;
+text-align: center;
+width: 100%;
+}
+.page {
+/* Scale down large landscape page to fit smaller screens nicely */
+transform: scale(0.65);
+transform-origin: top center;
+margin-bottom: -70mm;
+}
+}
+
+@media screen and (max-width: 768px) {
+.page {
+transform: scale(0.42);
+transform-origin: top center;
+margin-bottom: -115mm;
+}
+}
+
+@media print {
+body {
+background-color: transparent;
+padding: 0;
+}
+.no-print-bar {
+display: none !important;
+}
+.page {
+transform: none !important;
+box-shadow: none;
+margin: 0;
+page-break-after: always;
+border-radius: 0;
+width: 100vw;
+height: 100vh;
+}
+}
+
+@page {
+size: A4 landscape;
+margin: 0;
+}
+</style>
+</head>
+<body>
+
+<div class="no-print-bar">
+<div>
+<strong>📋 فرم رژیم غذایی مطب بچم</strong>
+<span style="font-size: 11px; opacity: 0.8; display: block;">دورت برگردم هر فیلدی که دلت خواست توش چیزی بنویسی روش کلیک کن بنویس. قربون دستای کوشولوش برم.</span>
+</div>
+<button class="btn-print" onclick="window.print()">🖨️ پرینت / ذخیره PDF</button>
+</div>
+
+<!-- PAGE 1 -->
+<div class="page">
+<div class="page-border"></div>
+
+<svg class="corner-leaf corner-bottom-right" viewBox="0 0 100 100" fill="#3b4522">
+<path d="M90,90 C70,50 40,30 10,10 C30,40 50,70 90,90 Z" opacity="0.6"/>
+<path d="M85,85 C65,55 45,40 20,25 C35,45 55,65 85,85 Z" opacity="0.4"/>
+</svg>
+
+<div class="content-wrap">
+<div class="header">
+<div class="header-box">
+<span>📅</span>
+<span>تاریخ شروع:</span>
+<span class="editable-field" contenteditable="true">۱۴۰۳/۰۶/۰۱</span>
+</div>
+
+<div class="header-title-container">
+<div class="header-title">
+<span>🍃</span>
+<span>برنامه غذایی هفتگی</span>
+<span>🍃</span>
+</div>
+<div class="header-subtitle">برنامه رژیمی شخصی خود را طبق جدول زیر تنظیم نمایید.</div>
+</div>
+
+<div class="header-box">
+<span>👤</span>
+<span>نام:</span>
+<span class="editable-field" contenteditable="true" style="min-width: 80px;">..................</span>
+</div>
+</div>
+
+<div class="summary-cards">
+<div class="card">
+<div class="card-header">
+<span>⚖️</span>
+<span>وزن فعلی:</span>
+</div>
+<div class="card-body">
+<span class="editable-field" contenteditable="true">...</span>
+<span style="font-size: 10px; color: #777;">کیلوگرم</span>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<span>🎯</span>
+<span>وزن هدف:</span>
+</div>
+<div class="card-body">
+<span class="editable-field" contenteditable="true">...</span>
+<span style="font-size: 10px; color: #777;">کیلوگرم</span>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<span>🏃‍♂️</span>
+<span>فعالیت بدنی:</span>
+</div>
+<div class="card-body">
+<span class="editable-field" contenteditable="true" style="width: 100%;">۳۰ دقیقه پیاده‌روی</span>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<span>🥛</span>
+<span>آب مصرفی:</span>
+</div>
+<div class="card-body">
+<div class="water-drops-wrapper">
+<div class="water-drops-container" id="waterContainer">
+<svg class="water-drop active" onclick="setWater(1)" viewBox="0 0 24 28"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="currentColor"/></svg>
+<svg class="water-drop active" onclick="setWater(2)" viewBox="0 0 24 28"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="currentColor"/></svg>
+<svg class="water-drop active" onclick="setWater(3)" viewBox="0 0 24 28"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="currentColor"/></svg>
+<svg class="water-drop active" onclick="setWater(4)" viewBox="0 0 24 28"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="currentColor"/></svg>
+<svg class="water-drop active" onclick="setWater(5)" viewBox="0 0 24 28"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="currentColor"/></svg>
+<svg class="water-drop active" onclick="setWater(6)" viewBox="0 0 24 28"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="currentColor"/></svg>
+<svg class="water-drop active" onclick="setWater(7)" viewBox="0 0 24 28"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="currentColor"/></svg>
+<svg class="water-drop active" onclick="setWater(8)" viewBox="0 0 24 28"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="currentColor"/></svg>
+<svg class="water-drop" onclick="setWater(9)" viewBox="0 0 24 28"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="currentColor"/></svg>
+<svg class="water-drop" onclick="setWater(10)" viewBox="0 0 24 28"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="currentColor"/></svg>
+</div>
+<div class="water-count-text" id="waterText">۸ لیوان در روز</div>
+</div>
+</div>
+</div>
+</div>
+
+<table class="diet-table">
+<thead>
+<tr>
+<th class="col-day">📅 روز</th>
+<th class="col-main">☀️ صبحانه</th>
+<th class="col-snack">🍎 میان وعده ۱</th>
+<th class="col-main">🍲 نهار</th>
+<th class="col-snack">🥗 میان وعده ۲</th>
+<th class="col-main">🌙 شام</th>
+<th class="col-snack">🥛 میان وعده ۳</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="day-cell">شنبه 🍃</td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+</tr>
+<tr>
+<td class="day-cell">یکشنبه 🍃</td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+</tr>
+<tr>
+<td class="day-cell">دوشنبه 🍃</td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+</tr>
+</tbody>
+</table>
+
+<div class="footer">
+<div class="page-number">صفحه ۱ از ۴</div>
+<div class="footer-brand">
+<span>🩺</span>
+<span>ندا سلمان مهاجر | کارشناس تغذیه و رژیم درمانی</span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+<div class="page-border"></div>
+
+<div class="content-wrap">
+<div class="header" style="justify-content: center; margin-bottom: 15px;">
+<div class="header-title-container">
+<div class="header-title">
+<span>🍃</span>
+<span>برنامه غذایی هفتگی (ادامه)</span>
+<span>🍃</span>
+</div>
+<div class="header-subtitle">برنامه رژیمی شخصی خود را طبق جدول زیر تنظیم نمایید.</div>
+</div>
+</div>
+
+<table class="diet-table">
+<thead>
+<tr>
+<th class="col-day">📅 روز</th>
+<th class="col-main">☀️ صبحانه</th>
+<th class="col-snack">🍎 میان وعده ۱</th>
+<th class="col-main">🍲 نهار</th>
+<th class="col-snack">🥗 میان وعده ۲</th>
+<th class="col-main">🌙 شام</th>
+<th class="col-snack">🥛 میان وعده ۳</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="day-cell">سه شنبه 🍃</td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+</tr>
+<tr>
+<td class="day-cell">چهارشنبه 🍃</td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+</tr>
+<tr>
+<td class="day-cell">پنجشنبه 🍃</td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+</tr>
+<tr>
+<td class="day-cell">جمعه 🍃</td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+<td contenteditable="true"></td>
+</tr>
+</tbody>
+</table>
+
+<div class="footer">
+<div class="page-number">صفحه ۲ از ۴</div>
+<div class="footer-brand">
+<span>🩺</span>
+<span>ندا سلمان مهاجر | کارشناس تغذیه و رژیم درمانی</span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+<div class="page-border"></div>
+
+<div class="content-wrap">
+<div class="header" style="justify-content: center; margin-bottom: 15px;">
+<div class="header-title-container">
+<div class="header-title">
+<span>🌿</span>
+<span>توصیه‌های غذایی</span>
+<span>🌿</span>
+</div>
+<div class="header-subtitle">برای دستیابی به بهترین نتایج، توصیه‌های زیر را رعایت کنید.</div>
+</div>
+</div>
+
+<div class="advice-container">
+<ul class="advice-list">
+<li class="advice-item"><span contenteditable="true">مصرف روزانه حداقل ۸ لیوان آب را فراموش نکنید.</span></li>
+<li class="advice-item"><span contenteditable="true">از مصرف روغن‌های جامد و فست فود پرهیز شود.</span></li>
+<li class="advice-item"><span contenteditable="true">ساعت شام ترجیحاً قبل از ساعت ۹ شب باشد.</span></li>
+<li class="advice-item"><span contenteditable="true">سبزیجات همراه با وعده‌های اصلی مصرف شود.</span></li>
+<li class="advice-item"><span contenteditable="true"></span></li>
+<li class="advice-item"><span contenteditable="true"></span></li>
+<li class="advice-item"><span contenteditable="true"></span></li>
+<li class="advice-item"><span contenteditable="true"></span></li>
+</ul>
+</div>
+
+<div class="footer">
+<div class="page-number">صفحه ۳ از ۴</div>
+<div class="footer-brand">
+<span>🩺</span>
+<span>ندا سلمان مهاجر | کارشناس تغذیه و رژیم درمانی</span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+<div class="page-border"></div>
+
+<div class="content-wrap">
+<div class="header" style="justify-content: center; margin-bottom: 15px;">
+<div class="header-title-container">
+<div class="header-title">
+<span>🍎🥦</span>
+<span>لیست واحد میوه‌ها و سبزیجات</span>
+<span>🥦🍎</span>
+</div>
+<div class="header-subtitle">هر واحد معادل مقدار زیر است.</div>
+</div>
+</div>
+
+<div class="lists-wrapper">
+<div class="list-box">
+<div class="list-header">
+<span>🍎</span>
+<span>واحد میوه‌ها</span>
+</div>
+<div class="list-body">
+<div class="list-row"><span contenteditable="true">سیب متوسط: ۱ عدد</span></div>
+<div class="list-row"><span contenteditable="true">موز کوچک: ۱ عدد</span></div>
+<div class="list-row"><span contenteditable="true">پرتقال: ۱ عدد</span></div>
+<div class="list-row"><span contenteditable="true">توت فرنگی: ۱ لیوان</span></div>
+<div class="list-row"><span contenteditable="true">انگور: ۳/۴ لیوان</span></div>
+<div class="list-row"><span contenteditable="true"></span></div>
+<div class="list-row"><span contenteditable="true"></span></div>
+</div>
+</div>
+
+<div class="list-box">
+<div class="list-header">
+<span>🥦</span>
+<span>واحد سبزیجات</span>
+</div>
+<div class="list-body">
+<div class="list-row"><span contenteditable="true">سبزیجات خام: ۱ لیوان</span></div>
+<div class="list-row"><span contenteditable="true">سبزیجات پخته: ۱/۲ لیوان</span></div>
+<div class="list-row"><span contenteditable="true">خیار متوسط: ۲ عدد</span></div>
+<div class="list-row"><span contenteditable="true">گوجه فرنگی: ۱ عدد</span></div>
+<div class="list-row"><span contenteditable="true">هویج: ۱ عدد</span></div>
+<div class="list-row"><span contenteditable="true"></span></div>
+<div class="list-row"><span contenteditable="true"></span></div>
+</div>
+</div>
+</div>
+
+<div class="footer">
+<div class="page-number">صفحه ۴ از ۴</div>
+<div class="footer-brand">
+<span>🩺</span>
+<span>ندا سلمان مهاجر | کارشناس تغذیه و رژیم درمانی</span>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+function setWater(count) {
+const container = document.getElementById('waterContainer');
+const drops = container.querySelectorAll('.water-drop');
+const text = document.getElementById('waterText');
+
+drops.forEach((drop, index) => {
+if (index < count) {
+drop.classList.add('active');
+} else {
+drop.classList.remove('active');
+}
+});
+
+const persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', '۱۰'];
+text.innerText = (persianNumbers[count] || count) + ' لیوان در روز';
+}
+</script>
+</body>
+</html>
