@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 <style>
+#protected-content { display: none; }
+
 :root {
 --bg-color: #fbf8f3;
 --card-bg: #f8f4ec;
@@ -39,7 +41,7 @@ align-items: center;
 padding: 10px;
 }
 
-/* Page Container - Landscape A4 aspect ratio */
+/* ساختار ثابت صفحه برای تطابق صددرصدی با A4 افقی */
 .page {
 width: 297mm;
 height: 210mm;
@@ -55,7 +57,6 @@ overflow: hidden;
 border-radius: 4px;
 }
 
-/* Decorative Double Border */
 .page-border {
 position: absolute;
 top: 6mm;
@@ -88,22 +89,19 @@ justify-content: space-between;
 
 .corner-leaf {
 position: absolute;
-width: 80px;
-height: 80px;
+width: 70px;
+height: 70px;
 opacity: 0.85;
 pointer-events: none;
 z-index: 1;
 }
-.corner-bottom-right {
-bottom: 6mm;
-right: 6mm;
-}
+.corner-bottom-right { bottom: 6mm; right: 6mm; }
 
 .header {
 display: flex;
 justify-content: space-between;
 align-items: center;
-margin-bottom: 12px;
+margin-bottom: 8px;
 padding: 0 5px;
 flex-shrink: 0;
 }
@@ -111,33 +109,30 @@ flex-shrink: 0;
 .header-box {
 display: flex;
 align-items: center;
-gap: 8px;
-font-size: 13px;
+gap: 6px;
+font-size: 12px;
 font-weight: 500;
 color: var(--primary-dark);
 background: rgba(255, 255, 255, 0.7);
-padding: 6px 14px;
-border-radius: 8px;
+padding: 5px 10px;
+border-radius: 6px;
 border: 1px solid var(--border-color);
 }
 
-.header-title-container {
-text-align: center;
-}
+.header-title-container { text-align: center; }
 
 .header-title {
-font-size: 24px;
+font-size: 23px;
 font-weight: 800;
 color: var(--primary-dark);
-letter-spacing: -0.5px;
 display: flex;
 align-items: center;
 justify-content: center;
-gap: 12px;
+gap: 10px;
 }
 
 .header-subtitle {
-font-size: 11px;
+font-size: 10.5px;
 color: var(--primary-medium);
 margin-top: 2px;
 font-weight: 500;
@@ -146,11 +141,11 @@ font-weight: 500;
 .editable-field {
 outline: none;
 border-bottom: 1px dashed var(--accent-gold);
-padding: 2px 6px;
-min-width: 60px;
+padding: 2px 4px;
+min-width: 50px;
 display: inline-block;
 transition: background 0.2s;
-min-height: 24px;
+min-height: 22px;
 }
 
 .editable-field:hover, .editable-field:focus {
@@ -161,26 +156,26 @@ border-bottom-style: solid;
 .summary-cards {
 display: grid;
 grid-template-columns: repeat(4, 1fr);
-gap: 12px;
-margin-bottom: 14px;
+gap: 10px;
+margin-bottom: 10px;
 }
 
 .card {
 background: #fff;
 border: 1px solid var(--border-color);
-border-radius: 10px;
+border-radius: 8px;
 padding: 8px 12px;
 display: flex;
 flex-direction: column;
 justify-content: center;
-box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-min-height: 65px;
+box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+min-height: 58px;
 }
 
 .card-header {
 display: flex;
 align-items: center;
-gap: 6px;
+gap: 4px;
 font-size: 11px;
 font-weight: 700;
 color: var(--primary-dark);
@@ -188,7 +183,7 @@ margin-bottom: 4px;
 }
 
 .card-body {
-font-size: 12px;
+font-size: 11.5px;
 display: flex;
 align-items: center;
 justify-content: space-between;
@@ -210,8 +205,8 @@ direction: ltr;
 }
 
 .water-drop {
-width: 18px;
-height: 22px;
+width: 15px;
+height: 19px;
 cursor: pointer;
 color: var(--water-inactive);
 transition: all 0.2s ease;
@@ -223,10 +218,10 @@ filter: drop-shadow(0 1px 2px rgba(2, 132, 199, 0.4));
 }
 
 .water-count-text {
-font-size: 11px;
+font-size: 10.5px;
 font-weight: 700;
 color: var(--primary-dark);
-margin-top: 2px;
+margin-top: 1px;
 }
 
 .diet-table {
@@ -235,10 +230,10 @@ table-layout: fixed;
 border-collapse: separate;
 border-spacing: 0;
 border: 1px solid var(--primary-dark);
-border-radius: 8px;
+border-radius: 6px;
 overflow: hidden;
 flex-grow: 1;
-margin: 10px 0;
+margin: 6px 0;
 }
 
 .col-day { width: 10%; }
@@ -248,9 +243,9 @@ margin: 10px 0;
 .diet-table th {
 background-color: var(--primary-dark);
 color: #ffffff;
-font-size: 12px;
+font-size: 11.5px;
 font-weight: 700;
-padding: 9px 3px;
+padding: 8px 4px;
 text-align: center;
 border-left: 1px solid rgba(255,255,255,0.15);
 white-space: nowrap;
@@ -258,39 +253,24 @@ overflow: hidden;
 text-overflow: ellipsis;
 }
 
-.diet-table th.col-main {
-background-color: #2e371a;
-font-size: 13px;
-}
-
-.diet-table th:last-child {
-border-left: none;
-}
+.diet-table th.col-main { background-color: #2e371a; font-size: 12.5px; }
+.diet-table th:last-child { border-left: none; }
 
 .diet-table td {
 background-color: #ffffff;
 border-bottom: 1px solid var(--light-border);
 border-left: 1px solid var(--light-border);
-padding: 8px 6px;
+padding: 7px 5px;
 font-size: 11px;
 vertical-align: top;
 outline: none;
 word-wrap: break-word;
 overflow-wrap: break-word;
-min-height: 35px;
 }
 
-.diet-table td:hover, .diet-table td:focus {
-background-color: #fffdf9;
-}
-
-.diet-table td:last-child {
-border-left: none;
-}
-
-.diet-table tr:last-child td {
-border-bottom: none;
-}
+.diet-table td:hover, .diet-table td:focus { background-color: #fffdf9; }
+.diet-table td:last-child { border-left: none; }
+.diet-table tr:last-child td { border-bottom: none; }
 
 .day-cell {
 background-color: var(--card-bg) !important;
@@ -298,16 +278,16 @@ font-weight: 700;
 color: var(--primary-dark);
 text-align: center;
 vertical-align: middle !important;
-font-size: 13px;
+font-size: 12.5px;
 }
 
 .advice-container {
 background: #ffffff;
 border: 1px solid var(--border-color);
-border-radius: 10px;
-padding: 20px 25px;
+border-radius: 8px;
+padding: 18px 22px;
 flex-grow: 1;
-margin-bottom: 10px;
+margin-bottom: 8px;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
@@ -317,7 +297,7 @@ justify-content: space-between;
 list-style: none;
 display: flex;
 flex-direction: column;
-gap: 12px;
+gap: 10px;
 }
 
 .advice-item {
@@ -325,35 +305,25 @@ display: flex;
 align-items: center;
 border-bottom: 1px dashed var(--border-color);
 padding-bottom: 6px;
-font-size: 13px;
+font-size: 12.5px;
 line-height: 1.6;
 }
 
-.advice-item::before {
-content: "🌿";
-margin-left: 10px;
-font-size: 12px;
-opacity: 0.8;
-}
-
-.advice-item span {
-width: 100%;
-outline: none;
-min-height: 22px;
-}
+.advice-item::before { content: "🌿"; margin-left: 10px; font-size: 12px; opacity: 0.8; }
+.advice-item span { width: 100%; outline: none; min-height: 22px; }
 
 .lists-wrapper {
 display: grid;
 grid-template-columns: 1fr 1fr;
-gap: 20px;
+gap: 15px;
 flex-grow: 1;
-margin-bottom: 10px;
+margin-bottom: 8px;
 }
 
 .list-box {
 background: #ffffff;
 border: 1px solid var(--border-color);
-border-radius: 10px;
+border-radius: 8px;
 overflow: hidden;
 display: flex;
 flex-direction: column;
@@ -362,19 +332,19 @@ flex-direction: column;
 .list-header {
 background-color: var(--primary-dark);
 color: white;
-padding: 10px 15px;
-font-size: 14px;
+padding: 9px 14px;
+font-size: 13.5px;
 font-weight: 700;
 display: flex;
 align-items: center;
-gap: 8px;
+gap: 6px;
 }
 
 .list-body {
-padding: 15px;
+padding: 12px 14px;
 display: flex;
 flex-direction: column;
-gap: 10px;
+gap: 9px;
 flex-grow: 1;
 }
 
@@ -383,22 +353,11 @@ display: flex;
 align-items: center;
 border-bottom: 1px solid var(--light-border);
 padding-bottom: 5px;
-font-size: 12px;
+font-size: 11.5px;
 }
 
-.list-row::before {
-content: "◯";
-margin-left: 8px;
-color: var(--accent-gold);
-font-weight: bold;
-font-size: 11px;
-}
-
-.list-row span {
-width: 100%;
-outline: none;
-min-height: 20px;
-}
+.list-row::before { content: "◯"; margin-left: 8px; color: var(--accent-gold); font-weight: bold; font-size: 10px; }
+.list-row span { width: 100%; outline: none; min-height: 20px; }
 
 .footer {
 flex-shrink: 0;
@@ -406,26 +365,14 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 padding: 4px 10px 0 10px;
-font-size: 11px;
+font-size: 10.5px;
 color: var(--primary-dark);
 font-weight: 600;
 }
 
-.footer-brand {
-display: flex;
-align-items: center;
-gap: 6px;
-}
+.footer-brand { display: flex; align-items: center; gap: 5px; }
+.page-number { background: var(--card-bg); padding: 2px 12px; border-radius: 10px; border: 1px solid var(--border-color); font-size: 10px; }
 
-.page-number {
-background: var(--card-bg);
-padding: 3px 12px;
-border-radius: 12px;
-border: 1px solid var(--border-color);
-font-size: 10px;
-}
-
-/* Print Controls Bar - Optimized for iOS */
 .no-print-bar {
 width: 100%;
 max-width: 297mm;
@@ -451,72 +398,74 @@ cursor: pointer;
 font-size: 13px;
 }
 
-/* Mobile / iPad Responsive scaling */
-@media screen and (max-width: 1150px) {
-body {
-padding: 5px;
-}
-.no-print-bar {
-flex-direction: column;
-gap: 10px;
-text-align: center;
-width: 100%;
-}
-.page {
-/* Scale down large landscape page to fit smaller screens nicely */
-transform: scale(0.65);
-transform-origin: top center;
-margin-bottom: -70mm;
-}
+/* واکنش‌گرا برای نمایش درست در صفحه مانیتور یا گوشی قبل از پرینت */
+@media screen and (max-width: 1200px) {
+body { padding: 5px; }
+.no-print-bar { flex-direction: column; gap: 8px; text-align: center; width: 100%; }
+.page { transform: scale(0.65); transform-origin: top center; margin-bottom: -70mm; }
 }
 
 @media screen and (max-width: 768px) {
-.page {
-transform: scale(0.42);
-transform-origin: top center;
-margin-bottom: -115mm;
-}
+.page { transform: scale(0.41); transform-origin: top center; margin-bottom: -120mm; }
 }
 
+/* بخش طلایی تنظیمات پرینت مشترک برای ویندوز، آیفون و آیپد */
 @media print {
+* {
+-webkit-print-color-adjust: exact !important;
+print-color-adjust: exact !important;
+}
 body {
-background-color: transparent;
-padding: 0;
+background-color: transparent !important;
+padding: 0 !important;
+margin: 0 !important;
 }
 .no-print-bar {
 display: none !important;
 }
 .page {
 transform: none !important;
-box-shadow: none;
-margin: 0;
-page-break-after: always;
-border-radius: 0;
-width: 100vw;
-height: 100vh;
+box-shadow: none !important;
+margin: 0 !important;
+border-radius: 0 !important;
+width: 100vw !important;
+height: 100vh !important;
+page-break-after: always !important;
+break-after: page !important;
+page-break-inside: avoid !important;
+break-inside: avoid !important;
 }
 }
 
 @page {
 size: A4 landscape;
-margin: 0;
+margin: 0mm;
 }
 </style>
 </head>
 <body>
+
+<script>
+const correctPassword = "1234";
+let userEntered = prompt("لطفاً رمز عبور فرم رژیم را وارد کنید:");
+if (userEntered === correctPassword) {
+document.write('<div id="protected-content">');
+} else {
+document.write('<div style="text-align:center; margin-top:100px; font-family:Vazirmatn, sans-serif;"><h3>❌ رمز عبور اشتباه است یا دسترسی مجاز نیست.</h3><p>لطفاً صفحه را رفرش کنید و دوباره تلاش کنید.</p></div>');
+}
+</script>
 
 <div class="no-print-bar">
 <div>
 <strong>📋 فرم رژیم غذایی مطب بچم</strong>
 <span style="font-size: 11px; opacity: 0.8; display: block;">دورت برگردم هر فیلدی که دلت خواست توش چیزی بنویسی روش کلیک کن بنویس. قربون دستای کوشولوش برم.</span>
 </div>
-<button class="btn-print" onclick="window.print()">🖨️ پرینت / ذخیره PDF</button>
+<button class="btn-print" onclick="window.print()">دریافت پرینت / PDF 📄</button>
 </div>
 
 <!-- PAGE 1 -->
 <div class="page">
 <div class="page-border"></div>
-
 <svg class="corner-leaf corner-bottom-right" viewBox="0 0 100 100" fill="#3b4522">
 <path d="M90,90 C70,50 40,30 10,10 C30,40 50,70 90,90 Z" opacity="0.6"/>
 <path d="M85,85 C65,55 45,40 20,25 C35,45 55,65 85,85 Z" opacity="0.4"/>
@@ -541,49 +490,34 @@ margin: 0;
 
 <div class="header-box">
 <span>👤</span>
-<span>نام:</span>
+<span>نام و نام خانوادگی:</span>
 <span class="editable-field" contenteditable="true" style="min-width: 80px;">..................</span>
 </div>
 </div>
 
 <div class="summary-cards">
 <div class="card">
-<div class="card-header">
-<span>⚖️</span>
-<span>وزن فعلی:</span>
-</div>
+<div class="card-header"><span>⚖️</span><span>وزن فعلی:</span></div>
 <div class="card-body">
 <span class="editable-field" contenteditable="true">...</span>
-<span style="font-size: 10px; color: #777;">کیلوگرم</span>
+<span style="font-size: 10px; color: #777;">کیلو</span>
 </div>
 </div>
-
 <div class="card">
-<div class="card-header">
-<span>🎯</span>
-<span>وزن هدف:</span>
-</div>
+<div class="card-header"><span>🎯</span><span>وزن هدف:</span></div>
 <div class="card-body">
 <span class="editable-field" contenteditable="true">...</span>
-<span style="font-size: 10px; color: #777;">کیلوگرم</span>
+<span style="font-size: 10px; color: #777;">کیلو</span>
 </div>
 </div>
-
 <div class="card">
-<div class="card-header">
-<span>🏃‍♂️</span>
-<span>فعالیت بدنی:</span>
-</div>
+<div class="card-header"><span>🏃‍♂️</span><span>فعالیت بدنی:</span></div>
 <div class="card-body">
 <span class="editable-field" contenteditable="true" style="width: 100%;">۳۰ دقیقه پیاده‌روی</span>
 </div>
 </div>
-
 <div class="card">
-<div class="card-header">
-<span>🥛</span>
-<span>آب مصرفی:</span>
-</div>
+<div class="card-header"><span>🥛</span><span>آب مصرفی:</span></div>
 <div class="card-body">
 <div class="water-drops-wrapper">
 <div class="water-drops-container" id="waterContainer">
@@ -617,42 +551,15 @@ margin: 0;
 </tr>
 </thead>
 <tbody>
-<tr>
-<td class="day-cell">شنبه 🍃</td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-</tr>
-<tr>
-<td class="day-cell">یکشنبه 🍃</td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-</tr>
-<tr>
-<td class="day-cell">دوشنبه 🍃</td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-</tr>
+<tr><td class="day-cell">شنبه 🍃</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+<tr><td class="day-cell">یکشنبه 🍃</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+<tr><td class="day-cell">دوشنبه 🍃</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
 </tbody>
 </table>
 
 <div class="footer">
 <div class="page-number">صفحه ۱ از ۴</div>
-<div class="footer-brand">
-<span>🩺</span>
-<span>ندا سلمان مهاجر | کارشناس تغذیه و رژیم درمانی</span>
-</div>
+<div class="footer-brand"><span>🩺</span><span>ندا سلمان مهاجر | کارشناس تغذیه و رژیم درمانی</span></div>
 </div>
 </div>
 </div>
@@ -660,20 +567,15 @@ margin: 0;
 <!-- PAGE 2 -->
 <div class="page">
 <div class="page-border"></div>
-
 <div class="content-wrap">
-<div class="header" style="justify-content: center; margin-bottom: 15px;">
+<div class="header" style="justify-content: center; margin-bottom: 12px;">
 <div class="header-title-container">
-<div class="header-title">
-<span>🍃</span>
-<span>برنامه غذایی هفتگی (ادامه)</span>
-<span>🍃</span>
-</div>
+<div class="header-title"><span>🍃</span><span>برنامه غذایی هفتگی (ادامه)</span><span>🍃</span></div>
 <div class="header-subtitle">برنامه رژیمی شخصی خود را طبق جدول زیر تنظیم نمایید.</div>
 </div>
 </div>
 
-<table class="diet-table">
+<table class="diet-table" style="flex-grow: 1;">
 <thead>
 <tr>
 <th class="col-day">📅 روز</th>
@@ -686,51 +588,16 @@ margin: 0;
 </tr>
 </thead>
 <tbody>
-<tr>
-<td class="day-cell">سه شنبه 🍃</td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-</tr>
-<tr>
-<td class="day-cell">چهارشنبه 🍃</td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-</tr>
-<tr>
-<td class="day-cell">پنجشنبه 🍃</td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-</tr>
-<tr>
-<td class="day-cell">جمعه 🍃</td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-<td contenteditable="true"></td>
-</tr>
+<tr><td class="day-cell">سه شنبه 🍃</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+<tr><td class="day-cell">چهارشنبه 🍃</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+<tr><td class="day-cell">پنجشنبه 🍃</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+<tr><td class="day-cell">جمعه 🍃</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
 </tbody>
 </table>
 
 <div class="footer">
 <div class="page-number">صفحه ۲ از ۴</div>
-<div class="footer-brand">
-<span>🩺</span>
-<span>ندا سلمان مهاجر | کارشناس تغذیه و رژیم درمانی</span>
-</div>
+<div class="footer-brand"><span>🩺</span><span>ندا سلمان مهاجر | کارشناس تغذیه و رژیم درمانی</span></div>
 </div>
 </div>
 </div>
@@ -738,15 +605,10 @@ margin: 0;
 <!-- PAGE 3 -->
 <div class="page">
 <div class="page-border"></div>
-
 <div class="content-wrap">
-<div class="header" style="justify-content: center; margin-bottom: 15px;">
+<div class="header" style="justify-content: center; margin-bottom: 12px;">
 <div class="header-title-container">
-<div class="header-title">
-<span>🌿</span>
-<span>توصیه‌های غذایی</span>
-<span>🌿</span>
-</div>
+<div class="header-title"><span>🌿</span><span>توصیه‌های غذایی</span><span>🌿</span></div>
 <div class="header-subtitle">برای دستیابی به بهترین نتایج، توصیه‌های زیر را رعایت کنید.</div>
 </div>
 </div>
@@ -766,10 +628,7 @@ margin: 0;
 
 <div class="footer">
 <div class="page-number">صفحه ۳ از ۴</div>
-<div class="footer-brand">
-<span>🩺</span>
-<span>ندا سلمان مهاجر | کارشناس تغذیه و رژیم درمانی</span>
-</div>
+<div class="footer-brand"><span>🩺</span><span>ندا سلمان مهاجر | کارشناس تغذیه و رژیم درمانی</span></div>
 </div>
 </div>
 </div>
@@ -777,25 +636,17 @@ margin: 0;
 <!-- PAGE 4 -->
 <div class="page">
 <div class="page-border"></div>
-
 <div class="content-wrap">
-<div class="header" style="justify-content: center; margin-bottom: 15px;">
+<div class="header" style="justify-content: center; margin-bottom: 12px;">
 <div class="header-title-container">
-<div class="header-title">
-<span>🍎🥦</span>
-<span>لیست واحد میوه‌ها و سبزیجات</span>
-<span>🥦🍎</span>
-</div>
+<div class="header-title"><span>🍎🥦</span><span>لیست واحد میوه‌ها و سبزیجات</span><span>🥦🍎</span></div>
 <div class="header-subtitle">هر واحد معادل مقدار زیر است.</div>
 </div>
 </div>
 
 <div class="lists-wrapper">
 <div class="list-box">
-<div class="list-header">
-<span>🍎</span>
-<span>واحد میوه‌ها</span>
-</div>
+<div class="list-header"><span>🍎</span><span>واحد میوه‌ها</span></div>
 <div class="list-body">
 <div class="list-row"><span contenteditable="true">سیب متوسط: ۱ عدد</span></div>
 <div class="list-row"><span contenteditable="true">موز کوچک: ۱ عدد</span></div>
@@ -808,14 +659,11 @@ margin: 0;
 </div>
 
 <div class="list-box">
-<div class="list-header">
-<span>🥦</span>
-<span>واحد سبزیجات</span>
-</div>
+<div class="list-header"><span>🥦</span><span>واحد سبزیجات</span></div>
 <div class="list-body">
 <div class="list-row"><span contenteditable="true">سبزیجات خام: ۱ لیوان</span></div>
 <div class="list-row"><span contenteditable="true">سبزیجات پخته: ۱/۲ لیوان</span></div>
-<div class="list-row"><span contenteditable="true">خیار متوسط: ۲ عدد</span></div>
+<div class="list-row"><text contenteditable="true">خیار متوسط: ۲ عدد</text></div>
 <div class="list-row"><span contenteditable="true">گوجه فرنگی: ۱ عدد</span></div>
 <div class="list-row"><span contenteditable="true">هویج: ۱ عدد</span></div>
 <div class="list-row"><span contenteditable="true"></span></div>
@@ -826,15 +674,14 @@ margin: 0;
 
 <div class="footer">
 <div class="page-number">صفحه ۴ از ۴</div>
-<div class="footer-brand">
-<span>🩺</span>
-<span>ندا سلمان مهاجر | کارشناس تغذیه و رژیم درمانی</span>
-</div>
+<div class="footer-brand"><span>🩺</span><span>ندا سلمان مهاجر | کارشناس تغذیه و رژیم درمانی</span></div>
 </div>
 </div>
 </div>
 
 <script>
+document.write('</div>');
+
 function setWater(count) {
 const container = document.getElementById('waterContainer');
 const drops = container.querySelectorAll('.water-drop');
