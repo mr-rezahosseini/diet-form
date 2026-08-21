@@ -65,7 +65,7 @@ padding: 10px;
 width: 297mm;
 height: 210mm;
 background-color: var(--bg-color);
-padding: 10mm 15mm;
+padding: 12mm 15mm;
 margin-bottom: 25px;
 box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 position: relative;
@@ -78,10 +78,10 @@ border-radius: 4px;
 
 .page-border {
 position: absolute;
-top: 5mm;
-left: 5mm;
-right: 5mm;
-bottom: 5mm;
+top: 6mm;
+left: 6mm;
+right: 6mm;
+bottom: 6mm;
 border: 2px solid var(--accent-gold);
 pointer-events: none;
 z-index: 1;
@@ -108,19 +108,19 @@ justify-content: space-between;
 
 .corner-leaf {
 position: absolute;
-width: 60px;
-height: 60px;
+width: 70px;
+height: 70px;
 opacity: 0.85;
 pointer-events: none;
 z-index: 1;
 }
-.corner-bottom-right { bottom: 5mm; right: 5mm; }
+.corner-bottom-right { bottom: 6mm; right: 6mm; }
 
 .header {
 display: flex;
 justify-content: space-between;
 align-items: center;
-margin-bottom: 4px;
+margin-bottom: 8px;
 padding: 0 5px;
 flex-shrink: 0;
 }
@@ -129,11 +129,11 @@ flex-shrink: 0;
 display: flex;
 align-items: center;
 gap: 6px;
-font-size: 11px;
+font-size: 12px;
 font-weight: 500;
 color: var(--primary-dark);
 background: rgba(255, 255, 255, 0.7);
-padding: 4px 8px;
+padding: 5px 10px;
 border-radius: 6px;
 border: 1px solid var(--border-color);
 }
@@ -141,19 +141,19 @@ border: 1px solid var(--border-color);
 .header-title-container { text-align: center; }
 
 .header-title {
-font-size: 20px;
+font-size: 23px;
 font-weight: 800;
 color: var(--primary-dark);
 display: flex;
 align-items: center;
 justify-content: center;
-gap: 8px;
+gap: 10px;
 }
 
 .header-subtitle {
-font-size: 9.5px;
+font-size: 10.5px;
 color: var(--primary-medium);
-margin-top: 1px;
+margin-top: 2px;
 font-weight: 500;
 }
 
@@ -164,7 +164,7 @@ padding: 2px 4px;
 min-width: 50px;
 display: inline-block;
 transition: background 0.2s;
-min-height: 20px;
+min-height: 22px;
 direction: rtl;
 unicode-bidi: plaintext;
 }
@@ -177,34 +177,34 @@ border-bottom-style: solid;
 .summary-cards {
 display: grid;
 grid-template-columns: repeat(4, 1fr);
-gap: 8px;
-margin-bottom: 6px;
+gap: 10px;
+margin-bottom: 10px;
 }
 
 .card {
 background: #fff;
 border: 1px solid var(--border-color);
-border-radius: 6px;
-padding: 6px 10px;
+border-radius: 8px;
+padding: 8px 12px;
 display: flex;
 flex-direction: column;
 justify-content: center;
 box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-min-height: 50px;
+min-height: 58px;
 }
 
 .card-header {
 display: flex;
 align-items: center;
 gap: 4px;
-font-size: 10.5px;
+font-size: 11px;
 font-weight: 700;
 color: var(--primary-dark);
-margin-bottom: 3px;
+margin-bottom: 4px;
 }
 
 .card-body {
-font-size: 10.5px;
+font-size: 11.5px;
 display: flex;
 align-items: center;
 justify-content: space-between;
@@ -214,20 +214,20 @@ justify-content: space-between;
 display: flex;
 flex-direction: column;
 align-items: flex-start;
-gap: 1px;
+gap: 2px;
 width: 100%;
 }
 
 .water-drops-container {
 display: flex;
 align-items: center;
-gap: 2px;
+gap: 3px;
 direction: ltr;
 }
 
 .water-drop {
-width: 12px;
-height: 16px;
+width: 15px;
+height: 19px;
 cursor: pointer;
 color: var(--water-inactive);
 transition: all 0.2s ease;
@@ -239,9 +239,10 @@ filter: drop-shadow(0 1px 2px rgba(2, 132, 199, 0.4));
 }
 
 .water-count-text {
-font-size: 9.5px;
+font-size: 10.5px;
 font-weight: 700;
 color: var(--primary-dark);
+margin-top: 1px;
 }
 
 .diet-table {
@@ -253,7 +254,7 @@ border: 1px solid var(--primary-dark);
 border-radius: 6px;
 overflow: hidden;
 flex-grow: 1;
-margin: 3px 0;
+margin: 6px 0;
 }
 
 .col-day { width: 10%; }
@@ -263,9 +264,9 @@ margin: 3px 0;
 .diet-table th {
 background-color: var(--primary-dark);
 color: #ffffff;
-font-size: 10.5px;
+font-size: 11.5px;
 font-weight: 700;
-padding: 6px 4px;
+padding: 8px 4px;
 text-align: center;
 border-left: 1px solid rgba(255,255,255,0.15);
 white-space: nowrap;
@@ -273,15 +274,15 @@ overflow: hidden;
 text-overflow: ellipsis;
 }
 
-.diet-table th.col-main { background-color: #2e371a; font-size: 11.5px; }
+.diet-table th.col-main { background-color: #2e371a; font-size: 12.5px; }
 .diet-table th:last-child { border-left: none; }
 
 .diet-table td {
 background-color: #ffffff;
 border-bottom: 1px solid var(--light-border);
 border-left: 1px solid var(--light-border);
-padding: 5px 4px;
-font-size: 10.5px;
+padding: 7px 5px;
+font-size: 11px;
 vertical-align: top;
 outline: none;
 word-wrap: break-word;
@@ -300,16 +301,16 @@ font-weight: 700;
 color: var(--primary-dark);
 text-align: center;
 vertical-align: middle !important;
-font-size: 11px;
+font-size: 12.5px;
 }
 
 .advice-container {
 background: #ffffff;
 border: 1px solid var(--border-color);
 border-radius: 8px;
-padding: 12px 18px;
+padding: 18px 22px;
 flex-grow: 1;
-margin-bottom: 6px;
+margin-bottom: 8px;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
@@ -319,26 +320,27 @@ justify-content: space-between;
 list-style: none;
 display: flex;
 flex-direction: column;
-gap: 6px;
+gap: 10px;
 }
 
 .advice-item {
 display: flex;
 align-items: center;
 border-bottom: 1px dashed var(--border-color);
-padding-bottom: 4px;
-font-size: 11.5px;
-line-height: 1.4;
+padding-bottom: 6px;
+font-size: 12.5px;
+line-height: 1.6;
 }
 
-.advice-item::before { content: "🌿"; margin-left: 8px; font-size: 10px; opacity: 0.8; }
-.advice-item span { width: 100%; outline: none; min-height: 18px; direction: rtl; unicode-bidi: plaintext; }
+.advice-item::before { content: "🌿"; margin-left: 10px; font-size: 12px; opacity: 0.8; }
+.advice-item span { width: 100%; outline: none; min-height: 22px; direction: rtl; unicode-bidi: plaintext; }
 
 .lists-wrapper {
 display: grid;
 grid-template-columns: 1fr 1fr;
-gap: 10px;
-margin-bottom: 4px;
+gap: 15px;
+flex-grow: 1;
+margin-bottom: 8px;
 }
 
 .list-box {
@@ -353,8 +355,8 @@ flex-direction: column;
 .list-header {
 background-color: var(--primary-dark);
 color: white;
-padding: 6px 10px;
-font-size: 11.5px;
+padding: 9px 14px;
+font-size: 13.5px;
 font-weight: 700;
 display: flex;
 align-items: center;
@@ -362,132 +364,37 @@ gap: 6px;
 }
 
 .list-body {
-padding: 6px 10px;
+padding: 12px 14px;
 display: flex;
 flex-direction: column;
-gap: 5px;
+gap: 9px;
+flex-grow: 1;
 }
 
 .list-row {
 display: flex;
 align-items: center;
 border-bottom: 1px solid var(--light-border);
-padding-bottom: 4px;
-font-size: 11px;
+padding-bottom: 5px;
+font-size: 11.5px;
 }
 
-.list-row::before { content: "◯"; margin-left: 6px; color: var(--accent-gold); font-weight: bold; font-size: 8px; }
+.list-row::before { content: "◯"; margin-left: 8px; color: var(--accent-gold); font-weight: bold; font-size: 10px; }
 .list-row span { width: 100%; outline: none; min-height: 20px; direction: rtl; unicode-bidi: plaintext; }
-
-.bottom-branding-section {
-background: #ffffff;
-border: 1px solid var(--border-color);
-border-radius: 8px;
-padding: 6px 12px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-top: 3px;
-}
-
-.qr-social-box {
-display: flex;
-align-items: center;
-gap: 10px;
-}
-
-/* سایز مناسب برای لوگوی سیب کنار QR کد */
-.bottom-logo-img {
-width: 36px;
-height: 36px;
-object-fit: contain;
-}
-
-/* سایز مناسب برای QR کد */
-.qr-img {
-width: 38px;
-height: 38px;
-object-fit: contain;
-border-radius: 4px;
-border: 1px solid var(--border-color);
-}
-
-.social-info {
-display: flex;
-flex-direction: column;
-gap: 1px;
-}
-
-.social-title {
-font-size: 10.5px;
-font-weight: 700;
-color: var(--primary-dark);
-}
-
-.social-id {
-font-size: 10px;
-color: #555;
-direction: ltr;
-text-align: right;
-font-weight: 600;
-}
-
-.contact-mini-info {
-font-size: 9px;
-color: #444;
-display: flex;
-flex-direction: column;
-gap: 1px;
-border-right: 2px solid var(--accent-gold);
-padding-right: 8px;
-margin-right: 4px;
-}
-
-.signature-stamp-box {
-display: flex;
-align-items: center;
-gap: 10px;
-}
-
-/* سایز مناسب برای مهر نظام پزشکی */
-.stamp-img {
-height: 38px;
-width: auto;
-max-width: 110px;
-object-fit: contain;
-border-radius: 4px;
-}
-
-.signature-area {
-width: 90px;
-height: 38px;
-border-bottom: 1px dashed var(--accent-gold);
-display: flex;
-flex-direction: column;
-justify-content: flex-end;
-align-items: center;
-position: relative;
-}
-
-.signature-label {
-font-size: 8.5px;
-color: #777;
-margin-bottom: 2px;
-}
 
 .footer {
 flex-shrink: 0;
 display: flex;
 justify-content: space-between;
 align-items: center;
-padding: 2px 8px 0 8px;
-font-size: 9.5px;
+padding: 4px 10px 0 10px;
+font-size: 10.5px;
 color: var(--primary-dark);
 font-weight: 600;
 }
 
-.footer-brand { display: flex; align-items: center; gap: 4px; }
-.page-number { background: var(--card-bg); padding: 2px 8px; border-radius: 10px; border: 1px solid var(--border-color); font-size: 9px; }
+.footer-brand { display: flex; align-items: center; gap: 5px; }
+.page-number { background: var(--card-bg); padding: 2px 12px; border-radius: 10px; border: 1px solid var(--border-color); font-size: 10px; }
 
 .no-print-bar {
 width: 100%;
@@ -559,7 +466,7 @@ margin: 0mm;
 </head>
 <body class="locked-body">
 
-<!-- صفحه قفل امنیتی -->
+<!-- content lock -->
 <div id="lock-screen">
 <h3 style="margin-bottom: 15px;">🔒 برنامه رژیم اختصاصی</h3>
 <p style="margin-bottom: 15px; font-size: 14px; opacity: 0.8;">لطفاً رمز عبور را وارد کنید:</p>
@@ -573,8 +480,8 @@ margin: 0mm;
 <div id="main-content" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
 <div class="no-print-bar">
 <div>
-<strong>🖨️ پنل خروجی هوشمند رژیم</strong>
-<span style="font-size: 11px; opacity: 0.8; display: block;">برای خروجی PDF، در پنل پرینت گزینه Destination را روی Save as PDF بگذارید.</span>
+<strong>📋 فرم رژیم غذایی مطب ندا سلمان مهاجر</strong>
+<span style="font-size: 11px; opacity: 0.8; display: block;">برای خروجیبرای ویرایش روی فیلد مورد نظر کلیک کنید.</span>
 </div>
 <button class="btn-print" onclick="window.print()">دریافت پرینت / PDF 📄</button>
 </div>
@@ -597,14 +504,16 @@ margin: 0mm;
 
 <div class="header-title-container">
 <div class="header-title">
+<span>🍃</span>
 <span>برنامه غذایی هفتگی</span>
+<span>🍃</span>
 </div>
 <div class="header-subtitle">برنامه رژیمی شخصی خود را طبق جدول زیر تنظیم نمایید.</div>
 </div>
 
 <div class="header-box">
 <span>👤</span>
-<span>نام:</span>
+<span>نام و نام خانوادگی:</span>
 <span class="editable-field" contenteditable="true" style="min-width: 80px;">..................</span>
 </div>
 </div>
@@ -614,14 +523,14 @@ margin: 0mm;
 <div class="card-header"><span>⚖️</span><span>وزن فعلی:</span></div>
 <div class="card-body">
 <span class="editable-field" contenteditable="true">...</span>
-<span style="font-size: 9.5px; color: #777;">کیلو</span>
+<span style="font-size: 10px; color: #777;">کیلو</span>
 </div>
 </div>
 <div class="card">
 <div class="card-header"><span>🎯</span><span>وزن هدف:</span></div>
 <div class="card-body">
 <span class="editable-field" contenteditable="true">...</span>
-<span style="font-size: 9.5px; color: #777;">کیلو</span>
+<span style="font-size: 10px; color: #777;">کیلو</span>
 </div>
 </div>
 <div class="card">
@@ -682,7 +591,7 @@ margin: 0mm;
 <div class="page">
 <div class="page-border"></div>
 <div class="content-wrap">
-<div class="header" style="justify-content: center; margin-bottom: 8px;">
+<div class="header" style="justify-content: center; margin-bottom: 12px;">
 <div class="header-title-container">
 <div class="header-title"><span>🍃</span><span>برنامه غذایی هفتگی (ادامه)</span><span>🍃</span></div>
 <div class="header-subtitle">برنامه رژیمی شخصی خود را طبق جدول زیر تنظیم نمایید.</div>
@@ -720,7 +629,7 @@ margin: 0mm;
 <div class="page">
 <div class="page-border"></div>
 <div class="content-wrap">
-<div class="header" style="justify-content: center; margin-bottom: 8px;">
+<div class="header" style="justify-content: center; margin-bottom: 12px;">
 <div class="header-title-container">
 <div class="header-title"><span>🌿</span><span>توصیه‌های غذایی</span><span>🌿</span></div>
 <div class="header-subtitle">برای دستیابی به بهترین نتایج، توصیه‌های زیر را رعایت کنید.</div>
@@ -751,7 +660,7 @@ margin: 0mm;
 <div class="page">
 <div class="page-border"></div>
 <div class="content-wrap">
-<div class="header" style="justify-content: center; margin-bottom: 4px;">
+<div class="header" style="justify-content: center; margin-bottom: 12px;">
 <div class="header-title-container">
 <div class="header-title"><span>🍎🥦</span><span>لیست واحد میوه‌ها و سبزیجات</span><span>🥦🍎</span></div>
 <div class="header-subtitle">هر واحد معادل مقدار زیر است.</div>
@@ -768,6 +677,7 @@ margin: 0mm;
 <div class="list-row"><span contenteditable="true">توت فرنگی: ۱ لیوان</span></div>
 <div class="list-row"><span contenteditable="true">انگور: ۳/۴ لیوان</span></div>
 <div class="list-row"><span contenteditable="true"></span></div>
+<div class="list-row"><span contenteditable="true"></span></div>
 </div>
 </div>
 
@@ -780,31 +690,7 @@ margin: 0mm;
 <div class="list-row"><span contenteditable="true">گوجه فرنگی: ۱ عدد</span></div>
 <div class="list-row"><span contenteditable="true">هویج: ۱ عدد</span></div>
 <div class="list-row"><span contenteditable="true"></span></div>
-</div>
-</div>
-</div>
-
-<!-- بخش پایین صفحه چهارم (لوگو، QR کد، اطلاعات تماس و مهر در کنار هم) -->
-<div class="bottom-branding-section">
-<div class="qr-social-box">
-<img src="https://raw.githubusercontent.com/mr-rezahosseini/diet-form/refs/heads/main/logo.png" alt="Logo" class="bottom-logo-img">
-<img src="https://raw.githubusercontent.com/mr-rezahosseini/diet-form/refs/heads/main/qrcode.jpeg" alt="QR Code" class="qr-img">
-
-<div class="social-info">
-<div class="social-title">SCAN ME</div>
-<div class="social-id">@Dietbyneda</div>
-</div>
-<div class="contact-mini-info">
-<span>📞 ۰۹۱۳ ۴۴۲ ۷۹۵۵</span>
-<span>📞 ۰۲۴ ۳۳۳۲ ۹۳۹۸</span>
-<span>📍 زنجان، ابتدای زینبیه غربی، ساختمان پزشکان سهیل، طبقه دوم</span>
-</div>
-</div>
-
-<div class="signature-stamp-box">
-<img src="https://raw.githubusercontent.com/mr-rezahosseini/diet-form/refs/heads/main/mohr.png" alt="مهر نظام پزشکی" class="stamp-img">
-<div class="signature-area">
-<span class="signature-label">امضای پزشک</span>
+<div class="list-row"><span contenteditable="true"></span></div>
 </div>
 </div>
 </div>
@@ -818,7 +704,7 @@ margin: 0mm;
 </div>
 
 <script>
-const correctPassword = "1234";
+const correctPassword = "1234"; // رمز عبور
 
 function checkPassword() {
 const inputVal = document.getElementById('passInput').value;
