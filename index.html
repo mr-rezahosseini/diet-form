@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>برنامه غذایی هفتگی - ندا سلمان مهاجر</title>
-<!-- html2pdf -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -167,6 +165,8 @@ min-width: 50px;
 display: inline-block;
 transition: background 0.2s;
 min-height: 22px;
+direction: rtl;
+unicode-bidi: plaintext;
 }
 
 .editable-field:hover, .editable-field:focus {
@@ -287,6 +287,8 @@ vertical-align: top;
 outline: none;
 word-wrap: break-word;
 overflow-wrap: break-word;
+direction: rtl;
+unicode-bidi: plaintext;
 }
 
 .diet-table td:hover, .diet-table td:focus { background-color: #fffdf9; }
@@ -331,7 +333,7 @@ line-height: 1.6;
 }
 
 .advice-item::before { content: "🌿"; margin-left: 10px; font-size: 12px; opacity: 0.8; }
-.advice-item span { width: 100%; outline: none; min-height: 22px; }
+.advice-item span { width: 100%; outline: none; min-height: 22px; direction: rtl; unicode-bidi: plaintext; }
 
 .lists-wrapper {
 display: grid;
@@ -378,7 +380,7 @@ font-size: 11.5px;
 }
 
 .list-row::before { content: "◯"; margin-left: 8px; color: var(--accent-gold); font-weight: bold; font-size: 10px; }
-.list-row span { width: 100%; outline: none; min-height: 20px; }
+.list-row span { width: 100%; outline: none; min-height: 20px; direction: rtl; unicode-bidi: plaintext; }
 
 .footer {
 flex-shrink: 0;
@@ -408,7 +410,7 @@ align-items: center;
 box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-.btn-download {
+.btn-print {
 background: var(--accent-gold);
 color: #2b2b2b;
 border: none;
@@ -428,11 +430,43 @@ body { padding: 5px; }
 @media screen and (max-width: 768px) {
 .page { transform: scale(0.41); transform-origin: top center; margin-bottom: -120mm; }
 }
+
+@media print {
+* {
+-webkit-print-color-adjust: exact !important;
+print-color-adjust: exact !important;
+}
+body {
+background-color: transparent !important;
+padding: 0 !important;
+margin: 0 !important;
+}
+.no-print-bar {
+display: none !important;
+}
+.page {
+transform: none !important;
+box-shadow: none !important;
+margin: 0 !important;
+border-radius: 0 !important;
+width: 100vw !important;
+height: 100vh !important;
+page-break-after: always !important;
+break-after: page !important;
+page-break-inside: avoid !important;
+break-inside: avoid !important;
+}
+}
+
+@page {
+size: A4 landscape;
+margin: 0mm;
+}
 </style>
 </head>
 <body class="locked-body">
 
-<!-- form lock -->
+<!-- صفحه قفل امنیتی -->
 <div id="lock-screen">
 <h3 style="margin-bottom: 15px;">🔒 برنامه رژیم اختصاصی</h3>
 <p style="margin-bottom: 15px; font-size: 14px; opacity: 0.8;">لطفاً رمز عبور را وارد کنید:</p>
@@ -442,18 +476,16 @@ body { padding: 5px; }
 <p id="errorMsg" style="color: #ff6b6b; margin-top: 15px; font-size: 13px; display: none;">❌ رمز عبور اشتباه است!</p>
 </div>
 
-<!-- diet plan -->
+<!-- محتوای اصلی برنامه -->
 <div id="main-content" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
 <div class="no-print-bar">
 <div>
 <strong>📋 فرم رژیم غذایی مطب ندا سلمان مهاجر</strong>
-<span style="font-size: 11px; opacity: 0.8; display: block;">برای ویرایش رو فیلد دلخواه کلیک کنید.</span>
+<span style="font-size: 11px; opacity: 0.8; display: block;">برای ویرایش روی فیلد دلخواه کلیک کنید.</span>
 </div>
-<button class="btn-download" onclick="downloadPDF()">دانلود فایل PDF 📄</button>
+<button class="btn-print" onclick="window.print()">دریافت پرینت / PDF 📄</button>
 </div>
 
-<!-- کانتینری که قرار است تبدیل به PDF شود -->
-<div id="pdf-container" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
 <!-- PAGE 1 -->
 <div class="page">
 <div class="page-border"></div>
@@ -670,7 +702,6 @@ body { padding: 5px; }
 </div>
 </div>
 </div>
-</div>
 
 <script>
 const correctPassword = "1234"; // رمز عبور
@@ -707,21 +738,6 @@ drop.classList.remove('active');
 
 const persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', '۱۰'];
 text.innerText = (persianNumbers[count] || count) + ' لیوان در روز';
-}
-
-// تابع دانلود مستقیم PDF با کتابخانه html2pdf
-function downloadPDF() {
-const element = document.getElementById('pdf-container');
-const opt = {
-margin: 0,
-filename: 'Diet-Plan-Neda-Salman-Mohajer.pdf',
-image: { type: 'jpeg', quality: 0.98 },
-html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
-};
-
-// اجرای عملیات تبدیل و دانلود
-html2pdf().from(element).set(opt).save();
 }
 </script>
 </body>
